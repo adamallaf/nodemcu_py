@@ -7,11 +7,11 @@ class MyWLAN:
     def __init__(self):
         self.__wlan = network.WLAN(network.STA_IF)
         self.__wlan.active(True)
-        self.__builtin_led = Pin(2)
+        self.__builtin_led = Pin(2, Pin.OUT)
 
     def connect(self, ssid=None, key=""):
         if ssid:
-            self.__wlan.connect(ssid, key=key)
+            self.__wlan.connect(ssid, key)
         else:
             self.__wlan.connect(*get_wifi_creds())
         self.__builtin_led.off()
