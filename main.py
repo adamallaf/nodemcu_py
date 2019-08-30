@@ -8,7 +8,7 @@ from wlan import MyWLAN
 
 
 rtc = machine.RTC()
-rtc.init((2019, 8, 29, 12, 22, 0, 0, 2))
+rtc.datetime((2019, 8, 30, 2, 7, 33, 0, 0))
 
 wlan = MyWLAN()
 i2c = I2CBus()
@@ -26,5 +26,6 @@ def temperature():
 while True:
     wlan.connect()
     while wlan.is_connected():
-        http.handle(temperature)
+        print(temperature())
+        time.sleep(1)
     time.sleep(10)

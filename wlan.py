@@ -1,6 +1,7 @@
 import network
+import time
 from machine import Pin
-from m_wifi import get_wifi_creds
+#from m_wifi import get_wifi_creds
 
 
 class MyWLAN:
@@ -13,12 +14,20 @@ class MyWLAN:
         if ssid:
             self.__wlan.connect(ssid, key)
         else:
-            self.__wlan.connect(*get_wifi_creds())
-        self.__builtin_led.off()
+            pass
+            #self.__wlan.connect(*get_wifi_creds())
+        self.__blink_led(10, 40, 60)
 
     def is_connected(self):
         return self.__wlan.isconnected()
 
     def disconnect(self):
         self.__wlan.disconnect()
-        self.__builtin_led.on()
+        self.__blink_led(20, 20, 40)
+
+    def __blink_led(self, count, l, h):
+        for i in range(count):
+            self.__builtin_led.off()
+            time.sleep_ms(l)
+            self.__builtin_led.on()
+            time.sleep_ms(h)
